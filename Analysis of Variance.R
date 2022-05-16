@@ -1,19 +1,19 @@
-# TÕTULO: PROCESSAMENTO DE DADOS PUPILARES
+# T√çTULO: PROCESSAMENTO DE DADOS PUPILARES
 # AUTOR:  RAFAEL NOBRE ORSI
-# DATA:   05 DE MAR«O DE 2017
+# DATA:   05 DE MAR√áO DE 2017
 # ----------------------------------------------------------------------------------------------------
 # ------------------------------ EXPERIMENTO: CONTAGEM COGNITIVA -------------------------------------
-# INTRODU«√O: 
-# ESTE ALGORITMO FOI DESENVOVIDO COMO PARTE DE UM TRABALHO DE MESTRADO EM ENGENHARIA EL…TRICA,
-# CUJO OBJETIVO … ESTUDAR O SISTEMA COGNITIVO POR MEIO DO PROCESSAMENTO DE SINAL PUPILAR. 
+# INTRODU√á√ÉO: 
+# ESTE ALGORITMO FOI DESENVOVIDO COMO PARTE DE UM TRABALHO DE MESTRADO EM ENGENHARIA EL√âTRICA,
+# CUJO OBJETIVO √â ESTUDAR O SISTEMA COGNITIVO POR MEIO DO PROCESSAMENTO DE SINAL PUPILAR. 
 
-# FUN«√O DO ALGORITMO: PROCESSAMENTO DE DADOS.
-# TIPO DE DADO: DI¬METRO PUPILAR.
-# EQUIPAMENTO PARA AQUISI«√O DE DADOS: TOBII STUDIO TX300.
+# FUN√á√ÉO DO ALGORITMO: PROCESSAMENTO DE DADOS.
+# TIPO DE DADO: DI√ÇMETRO PUPILAR.
+# EQUIPAMENTO PARA AQUISI√á√ÉO DE DADOS: TOBII STUDIO TX300.
 
 # ETAPAS DO ALGORITMO:
 # ETAPA 1: ENTRADA DE DADOS;
-# ETAPA 2: FILTRO E ORGANIZA«√O DOS DADOS;
+# ETAPA 2: FILTRO E ORGANIZA√á√ÉO DOS DADOS;
 # ETAPA 3: PROCESSAMENTO DOS DADOS;
 # ETAPA 4: (DESCREVER).
 
@@ -21,15 +21,15 @@
 # ----------------------------------------------------------------------------------------------------
 # ETAPA 1:ENTRADA DE DADOS.
 # Este algoritmo espera como entrada uma base de dados em formato TSV (Tab Separated Value).
-# A base de dados deve conter as vari·veis: ParticipantName, MediaName, PupilLeft e PupilRight.
+# A base de dados deve conter as vari√°veis: ParticipantName, MediaName, PupilLeft e PupilRight.
 
-getwd() # Comando para apontar um diretÛrio de trabalho
+getwd() # Comando para apontar um diret√≥rio de trabalho
 #setwd('C:/Users/Rafa/Desktop/Adicione1') #(Note)
 #setwd('C:/Users/wp/Desktop/Adicione1') # (Desk work)
-setwd('C:/Users/Trabalho/Desktop/ContagemCognitiva') #ConfiguraÁ„o do diretÛrio (Desk Home).
+setwd('C:/Users/Trabalho/Desktop/ContagemCognitiva') #Configura√ß√£o do diret√≥rio (Desk Home).
 
-# Comando para ler a base e dados e atribuÌ-la a uma vari·vel
-pupil <- read.csv("pupila.tsv", header = TRUE, sep = "\t")  #variavel <- read.tsv("aqruivo.csv", header = TRUE(usa primeira linha como tÌtulo), sep = "\t" (separador \t = tab)) 
+# Comando para ler a base e dados e atribu√≠-la a uma vari√°vel
+pupil <- read.csv("pupila.tsv", header = TRUE, sep = "\t")  #variavel <- read.tsv("aqruivo.csv", header = TRUE(usa primeira linha como t√≠tulo), sep = "\t" (separador \t = tab)) 
 
 pupil <- pupil[!is.na(pupil$MediaName),] #Filtra onde MediaName = NA
 pupil <- pupil[!is.na(pupil$PupilLeft),] #Filtra onde PupilLeft = NA
@@ -37,13 +37,13 @@ pupil <- pupil[!is.na(pupil$PupilRight),] #Filtra onde PupilLeft = NA
 pupil <- pupil[pupil$MediaName!="", ] #Filtra onde MediaName = vazio
 pupil <- pupil[pupil$MediaName!="6x6.jpg", ] #Filtra Slide teste6x6.jpg
 pupil$mean <- (pupil$PupilLeft + pupil$PupilRight) / 2 # Media entre pupila direita e esquerda
-pupil$X <- NULL #Remove a coluna X (que apareceu n„o sei de onde)
-pupil$PupilLeft <- NULL #N„o usa mais, remove para diminuir o processamento
-pupil$PupilRight <- NULL #N„o usa mais, remove para diminuir o processamento
+pupil$X <- NULL #Remove a coluna X (que apareceu n√£o sei de onde)
+pupil$PupilLeft <- NULL #N√£o usa mais, remove para diminuir o processamento
+pupil$PupilRight <- NULL #N√£o usa mais, remove para diminuir o processamento
 
 #write.csv(pupil,"pupilfilter.csv") #Grava arquivo filtrado 
 
-#FunÁ„o pra gerar lista de vari‚ncia por participante/slide
+#Fun√ß√£o pra gerar lista de vari√¢ncia por participante/slide
 #Inputs: rec<-c("conjunto de participantes"), slide<-c("conjunto de slides")
 fvar = function(rec,slide){
   lr<-length(rec) #comprimento de rec
@@ -53,9 +53,9 @@ fvar = function(rec,slide){
   for (j in c(rec)){
     c<-1
     for(i in c(slide)){
-      x1 <- pupil[pupil$Ô..RecordingName==j,] #Filtra o participante
+      x1 <- pupil[pupil$√Ø..RecordingName==j,] #Filtra o participante
       x2 <- x1[x1$MediaName==i,] #Filtra o slide
-      lista[r,c] <- var(x2$mean) #Calcula a Vari‚ncia de cada participante por Slide e monta lista
+      lista[r,c] <- var(x2$mean) #Calcula a Vari√¢ncia de cada participante por Slide e monta lista
       c<-c+1
     }
     r<-r+1
@@ -68,12 +68,12 @@ rec<-c("Rec 02","Rec 03","Rec 04","Rec 05","Rec 06","Rec 07","Rec 08","Rec 09","
        "Rec 12","Rec 13","Rec 14","Rec 15","Rec 16","Rec 17","Rec 18","Rec 19","Rec 20","Rec 22",
        "Rec 23","Rec 24","Rec 25","Rec 26","Rec 27","Rec 28","Rec 29","Rec 30","Rec 31","Rec 32")
 
-#SequÍncia de aplicaÁ„o do teste
+#Sequ√™ncia de aplica√ß√£o do teste
 slidet<-c("7x8a.JPG","4x5a.JPG","7x8b.JPG","12x13a.JPG","4x5b.JPG","7x12a.JPG","7x8c.JPG",
           "8x11a.JPG","4x5c.JPG","12x13b.JPG","7x12c.JPG","12x13c.JPG","11x14a.JPG",
           "8x11b.JPG","7x12b.JPG","8x11c.JPG","11x14b.JPG","11x14c.JPG")
 
-#SequÍncia por quantidade
+#Sequ√™ncia por quantidade
 slideq<-c("4x5a.JPG","4x5b.JPG","4x5c.JPG",
           "7x8a.JPG","7x8b.JPG","7x8c.JPG",
           "7x12a.JPG","7x12b.JPG","7x12c.JPG",
@@ -81,7 +81,7 @@ slideq<-c("4x5a.JPG","4x5b.JPG","4x5c.JPG",
           "11x14a.JPG","11x14b.JPG","11x14c.JPG",
           "12x13a.JPG","12x13b.JPG","12x13c.JPG")
 
-#Sequ ncia por padrıes A / B / C
+#Sequ√äncia por padr√µes A / B / C
 slidep<-c("4x5a.JPG","7x8a.JPG","7x12a.JPG","8x11a.JPG","11x14a.JPG","12x13a.JPG",
           "4x5b.JPG","7x8b.JPG","7x12b.JPG","8x11b.JPG","11x14b.JPG","12x13b.JPG",
           "4x5c.JPG","7x8c.JPG","7x12c.JPG","8x11c.JPG","11x14c.JPG","12x13c.JPG")
@@ -101,7 +101,7 @@ for(j in 1:30){
   }
 }
 
-#Agrupamento por padr„o
+#Agrupamento por padr√£o
 gspad<-matrix(0,30,3)
 for(j in 1:30){
   for(i in 1:3){
@@ -109,14 +109,14 @@ for(j in 1:30){
   }
 }
 
-pdf("1-Vari‚ncia por quantidade.pdf",width = 5, height = 4)
+pdf("1-Vari√¢ncia por quantidade.pdf",width = 5, height = 4)
 par(mfrow=c(1,1),mar=c(4,4,1,1),bty="l", cex.axis=0.85,cex.lab=0.85)
 boxplot(x = as.list(as.data.frame(gsquant)),ylim=c(0,.08),xaxt = "n",
-        xlab="Quantidade", ylab="Vari‚ncia do di‚metro da pupila (cm)")
+        xlab="Quantidade", ylab="Vari√¢ncia do di√¢metro da pupila (cm)")
 axis(1,at=1:6,labels=c("20","56","84","88","154","156"))
 dev.off()
 
-#subdivis„o da matriz original para plotar quantidades separados
+#subdivis√£o da matriz original para plotar quantidades separados
 spad20<-matrix(0,30,3)
 spad56<-matrix(0,30,3)
 spad84<-matrix(0,30,3)
@@ -134,16 +134,16 @@ for(j in 1:30){
   }
 }
 
-pdf("1.1-Vari‚ncia por quantidade.pdf",width = 5, height = 4)
+pdf("1.1-Vari√¢ncia por quantidade.pdf",width = 5, height = 4)
 par(mfrow=c(1,6),oma=c(2,3.5,0,0),mar=c(4,1,1,1),bty="l", cex.axis=0.85,cex.lab=0.85)
 boxplot(x = as.list(as.data.frame(spad20)),ylim=c(0,.11),xaxt = "n",
-        xlab="20", ylab="Vari‚ncia do di‚metro da pupila (cm)")
-mtext(c("Vari‚ncia do di‚metro da pupila (cm)"),side=2,line=3) # escreve na margem
+        xlab="20", ylab="Vari√¢ncia do di√¢metro da pupila (cm)")
+mtext(c("Vari√¢ncia do di√¢metro da pupila (cm)"),side=2,line=3) # escreve na margem
 axis(1,at=1:3,labels=c("A","B","C"))
 boxplot(x = as.list(as.data.frame(spad56)),ylim=c(0,.11),xaxt="n",xlab="56")
 axis(1,at=1:3,labels=c("A","B","C"))
 boxplot(x = as.list(as.data.frame(spad84)),ylim=c(0,.11),xaxt="n",xlab="84")
-mtext(c("             Padr„o/Quantidade"),side=1,line=5) # escreve na margem
+mtext(c("             Padr√£o/Quantidade"),side=1,line=5) # escreve na margem
 axis(1,at=1:3,labels=c("A","B","C"))
 boxplot(x = as.list(as.data.frame(spad88)),ylim=c(0,.11),xaxt="n",xlab="88")
 axis(1,at=1:3,labels=c("A","B","C"))
@@ -153,19 +153,14 @@ boxplot(x = as.list(as.data.frame(spad156)),ylim=c(0,.11),xaxt="n",xlab="156")
 axis(1,at=1:3,labels=c("A","B","C"))
 dev.off()
 
-
-
-
-
-
-pdf("2-Vari‚ncia por padr„o.pdf",width = 5, height = 4)
+pdf("2-Vari√¢ncia por padr√£o.pdf",width = 5, height = 4)
 par(mfrow=c(1,1),mar=c(4,4,1,1),bty="l", cex.axis=0.85,cex.lab=0.85)
 boxplot(x = as.list(as.data.frame(gspad)),ylim=c(0,.08),xaxt = "n",
-        xlab="Padr„o", ylab="Vari‚ncia do di‚metro da pupila (cm)")
+        xlab="Padr√£o", ylab="Vari√¢ncia do di√¢metro da pupila (cm)")
 axis(1,at=1:3,labels=c("A","B","C"))
 dev.off()
 
-#subdivis„o da matriz original para plotar padrıes separados
+#subdivis√£o da matriz original para plotar padr√µes separados
 spada<-matrix(0,30,6)
 spadb<-matrix(0,30,6)
 spadc<-matrix(0,30,6)
@@ -177,18 +172,18 @@ for(j in 1:30){
   }
 }
 
-pdf("3-Vari‚ncia por padr„o.pdf",width = 5, height = 4)
+pdf("3-Vari√¢ncia por padr√£o.pdf",width = 5, height = 4)
 par(mfrow=c(1,3),oma=c(0,3.5,0,0),mar=c(4,1,1,1),bty="l", cex.axis=0.85,cex.lab=0.85)
 boxplot(x = as.list(as.data.frame(spada)),ylim=c(0,.11),xaxt = "n",
-        ylab="Vari‚ncia do di‚metro da pupila (cm)")
-mtext(c("Vari‚ncia do di‚metro da pupila (cm)"),side=2,line=3) # escreve na margem
-mtext(c("Padr„o A"),side=1,line=3) # escreve na margem
+        ylab="Vari√¢ncia do di√¢metro da pupila (cm)")
+mtext(c("Vari√¢ncia do di√¢metro da pupila (cm)"),side=2,line=3) # escreve na margem
+mtext(c("Padr√£o A"),side=1,line=3) # escreve na margem
 axis(1,at=1:6,labels=c(1:6))
 boxplot(x = as.list(as.data.frame(spadb)),ylim=c(0,.11),xaxt="n")
-mtext(c("Padr„o B"),side=1,line=3) # escreve na margem
+mtext(c("Padr√£o B"),side=1,line=3) # escreve na margem
 axis(1,at=1:6,labels=c(1:6))
 boxplot(x = as.list(as.data.frame(spadc)),ylim=c(0,.11),xaxt="n")
-mtext(c("Padr„o C"),side=1,line=3) # escreve na margem
+mtext(c("Padr√£o C"),side=1,line=3) # escreve na margem
 axis(1,at=1:6,labels=c(1:6))
 dev.off()
 
@@ -222,20 +217,20 @@ for(j in 1:18){
 pdf("4-Estimativa por quartil.pdf",width = 6, height = 4)
 par(mfrow=c(1,1),mar=c(4,4,1,1),bty="l",cex=0.85)
 plot(c(1:18),Gq1,col="blue",type="p",xaxt="n",ylim=c(0,.12),
-     xlab="Quantidade",ylab="Vari‚ncia mÈdia do quartil (cm)")
-lines(lowess(Gq1),col="blue",lwd=1)#lowess usa regress„o polinomial ponderada localmente
+     xlab="Quantidade",ylab="Vari√¢ncia m√©dia do quartil (cm)")
+lines(lowess(Gq1),col="blue",lwd=1)#lowess usa regress√£o polinomial ponderada localmente
 lines(Gq2,col="green",type="p")
 lines(lowess(Gq2),col="green",lwd=1)
 lines(Gq3,col="orange",type="p")
 lines(lowess(Gq3),col="orange",lwd=1)
 lines(Gq4,col="red",type="p")
 lines(lowess(Gq4),col="red",lwd=1)
-legend("topleft", legend=c("1∫ Quartil","2∫ Quartil","3∫ Quartil","4∫ Quartil"),cex = 0.85,
+legend("topleft", legend=c("1¬∫ Quartil","2¬∫ Quartil","3¬∫ Quartil","4¬∫ Quartil"),cex = 0.85,
        col=c("blue","green","orange","red"),lty=1,lwd=1, bty="n")
 axis(1,at=1:18,labels=c("","20","","","56","","","84","","","88","","","154","","","156",""))
 dev.off()
 
-#FunÁ„o para facilitar plot 5
+#Fun√ß√£o para facilitar plot 5
 gfl = function(lg,corset){
   for(j in 1:18){
     for(i in 1:5){
@@ -244,9 +239,9 @@ gfl = function(lg,corset){
   }
 }
 
-pdf("5-Estimativa polinomial com todos os pontos.pdf",width = 8, height = 8) #Gr·fico OK
+pdf("5-Estimativa polinomial com todos os pontos.pdf",width = 8, height = 8) #Gr√°fico OK
 par(mfrow=c(1,1),mar=c(5.1,4.5,4.1,2.1),bty="l",cex.axis=1.2,cex.lab=2)
-plot(c(1,18),c(0,.18),type='n',xaxt="n" ,xlab="Quantidade",ylab="Vari‚ncia mÈdia do quartil (mm)")
+plot(c(1,18),c(0,.18),type='n',xaxt="n" ,xlab="Quantidade",ylab="Vari√¢ncia m√©dia do quartil (mm)")
 gfl(q1,"blue")
 gfl(q2,"green")
 gfl(q3,"orange")
@@ -255,7 +250,7 @@ lines(lowess(Gq1),col="blue",lwd=2)
 lines(lowess(Gq2),col="green",lwd=2)
 lines(lowess(Gq3),col="orange",lwd=2)
 lines(lowess(Gq4),col="red",lwd=2)
-legend("topleft", legend=c("1∫ Quartil","2∫ Quartil","3∫ Quartil","4∫ Quartil"),cex = 1.5,
+legend("topleft", legend=c("1¬∫ Quartil","2¬∫ Quartil","3¬∫ Quartil","4¬∫ Quartil"),cex = 1.5,
        col=c("blue","green","orange","red"),lty=1,lwd=2, bty="n")
 axis(1,at=1:18,labels=c("","20","","","56","","","84","","","88","","","154","","","156",""))
 dev.off()
@@ -333,28 +328,26 @@ boxplot(x = as.list(as.data.frame(boxpadraototal[1:8,69:72])),ylim=c(0,.13),xaxt
 axis(1,at=1:4,labels=c("q1","q2","q3","q4"))
 dev.off()
 
-#N„o usar este gr·fico
 pdf("7-Boxplot por quartil.pdf",width = 14, height = 10)
 par(mfrow=c(2,2),mar=c(4.5,5,4.5,0),bty="l", cex.axis=1,cex.lab=1.5)
 boxplot(x = as.list(as.data.frame(boxpadraoq1)),ylim=c(0,.11),xaxt = "n",
-        ylab="Vari‚ncia mÈdia do quartil (mm)",xlab="Quartil 1")
+        ylab="Vari√¢ncia m√©dia do quartil (mm)",xlab="Quartil 1")
 axis(1,at=1:18,labels=c(1:18))
 boxplot(x = as.list(as.data.frame(boxpadraoq2)),ylim=c(0,.11),xaxt = "n",
-        ylab="Vari‚ncia mÈdia do quartil (mm)",xlab="Quartil 2")
+        ylab="Vari√¢ncia m√©dia do quartil (mm)",xlab="Quartil 2")
 axis(1,at=1:18,labels=c(1:18))
 boxplot(x = as.list(as.data.frame(boxpadraoq3)),ylim=c(0,.11),xaxt = "n",
-        ylab="Vari‚ncia mÈdia do quartil (mm)",xlab="Quartil 3")
+        ylab="Vari√¢ncia m√©dia do quartil (mm)",xlab="Quartil 3")
 axis(1,at=1:18,labels=c(1:18))
 boxplot(x = as.list(as.data.frame(boxpadraoq4)),ylim=c(0,.11),xaxt = "n",
-        ylab="Vari‚ncia mÈdia do quartil (mm)",xlab="Quartil 4")
+        ylab="Vari√¢ncia m√©dia do quartil (mm)",xlab="Quartil 4")
 axis(1,at=1:18,labels=c(1:18))
 dev.off()
 
-#N„o usar este gr·fico
 pdf("8-Boxplot por quartil.pdf",width = 14, height = 10)
 par(mfrow=c(1,1),mar=c(4.5,5,4.5,0),bty="l", cex.axis=1,cex.lab=1.5)
 boxplot(x = as.list(as.data.frame(boxpadraototal)),ylim=c(0,.11),xaxt = "n",
-        ylab="Vari‚ncia mÈdia do quartil (mm)",xlab="(Q1|Q2|Q3|Q4)*(Padrıes)")
+        ylab="Vari√¢ncia m√©dia do quartil (mm)",xlab="(Q1|Q2|Q3|Q4)*(Padr√µes)")
 axis(1,at=1:72,labels=c(1:72))
 dev.off()
 
@@ -386,7 +379,6 @@ for(i in 1:7){
   }
 }
 
-#N„o usar este gr·fico
 pdf("9-Boxplot por quartil.pdf",width = 12, height = 10)
 par(mfrow=c(3,6),mar=c(4.5,5,4.5,0),bty="l", cex.axis=1,cex.lab=1.5)
 boxplot(x = as.list(as.data.frame(boxqtdetotal[1:8,1:4])),ylim=c(0,.11),xaxt = "n",xlab="20A")
@@ -430,24 +422,23 @@ dev.off()
 pdf("10-Boxplot por quartil.pdf",width = 8, height = 8)
 par(mfrow=c(4,1),mar=c(4.5,5,4.5,0),bty="l", cex.axis=1,cex.lab=1.5)
 boxplot(x = as.list(as.data.frame(boxqtdeq1)),ylim=c(0,.13),xaxt = "n",
-        ylab="Vari‚ncia mÈdia do quartil (mm)",xlab="Quartil 1")
+        ylab="Vari√¢ncia m√©dia do quartil (mm)",xlab="Quartil 1")
 axis(1,at=1:18,labels=c(1:18))
 boxplot(x = as.list(as.data.frame(boxqtdeq2)),ylim=c(0,.13),xaxt = "n",
-        ylab="Vari‚ncia mÈdia do quartil (mm)",xlab="Quartil 2")
+        ylab="Vari√¢ncia m√©dia do quartil (mm)",xlab="Quartil 2")
 axis(1,at=1:18,labels=c(1:18))
 boxplot(x = as.list(as.data.frame(boxqtdeq3)),ylim=c(0,.13),xaxt = "n",
-        ylab="Vari‚ncia mÈdia do quartil (mm)",xlab="Quartil 3")
+        ylab="Vari√¢ncia m√©dia do quartil (mm)",xlab="Quartil 3")
 axis(1,at=1:18,labels=c(1:18))
 boxplot(x = as.list(as.data.frame(boxqtdeq4)),ylim=c(0,.13),xaxt = "n",
-        ylab="Vari‚ncia mÈdia do quartil (mm)",xlab="Quartil 4")
+        ylab="Vari√¢ncia m√©dia do quartil (mm)",xlab="Quartil 4")
 axis(1,at=1:18,labels=c(1:18))
 dev.off()
 
-#N„o usar este gr·fico
 pdf("11-Boxplot por quartil.pdf",width = 14, height = 10) 
 par(mfrow=c(1,1),mar=c(4.5,5,4.5,0),bty="l", cex.axis=1,cex.lab=1.5)
 boxplot(x = as.list(as.data.frame(boxqtdetotal)),ylim=c(0,.11),xaxt = "n",
-        ylab="Vari‚ncia mÈdia do quartil (mm)",xlab="(Q1|Q2|Q3|Q4)*(Padrıes)")
+        ylab="Vari√¢ncia m√©dia do quartil (mm)",xlab="(Q1|Q2|Q3|Q4)*(Padr√µes)")
 axis(1,at=1:72,labels=c(1:72))
 dev.off()
 
@@ -480,7 +471,6 @@ for(i in 1:8){
   }
 }
 
-#N„o usar este gr·fico
 pdf("12-Boxplot por quartil.pdf",width = 14, height = 6)
 par(mfrow=c(1,6),mar=c(4.5,5,4.5,0),bty="l", cex.axis=1,cex.lab=1.5)
 boxplot(x = as.list(as.data.frame(Gboxqtdetotal[1:24,1:4])),ylim=c(0,.11),xaxt = "n",xlab="20")
@@ -497,7 +487,6 @@ boxplot(x = as.list(as.data.frame(Gboxqtdetotal[1:24,21:24])),ylim=c(0,.11),xaxt
 axis(1,at=1:4,labels=c("q1","q2","q3","q4"))
 dev.off()
 
-#N„o usar este gr·fico
 pdf("13-Boxplot por quartil.pdf",width = 14, height = 6)
 par(mfrow=c(1,1),mar=c(4.5,5,4.5,0),bty="l", cex.axis=1,cex.lab=1.5)
 boxplot(x = as.list(as.data.frame(Gboxqtdetotal)),ylim=c(0,.11),xaxt = "n",xlab="Quantidade")
@@ -506,7 +495,7 @@ dev.off()
 
 #Prova Real
 #----------------------------------------------------------------------
-pupilpr <- read.csv("pupilapr.tsv", header = TRUE, sep = "\t") #LÍ arquivo: nomedavariavel <- read.csv("nomedoaqruivo.csv", header = TRUE(usa primeira linha como tÌtulo), sep = "\t" (separador \t = tab)) 
+pupilpr <- read.csv("pupilapr.tsv", header = TRUE, sep = "\t") #L√™ arquivo: nomedavariavel <- read.csv("nomedoaqruivo.csv", header = TRUE(usa primeira linha como t√≠tulo), sep = "\t" (separador \t = tab)) 
 
 pupilpr <- pupilpr[!is.na(pupilpr$MediaName),] #Filtra onde MediaName = NA
 pupilpr <- pupilpr[!is.na(pupilpr$PupilLeft),] #Filtra onde PupilLeft = NA
@@ -514,9 +503,9 @@ pupilpr <- pupilpr[!is.na(pupilpr$PupilRight),] #Filtra onde PupilLeft = NA
 pupilpr <- pupilpr[pupilpr$MediaName!="", ] #Filtra onde MediaName = vazio
 pupilpr <- pupilpr[pupilpr$MediaName!="6x6.jpg", ] #Filtra Slide teste6x6.jpg
 pupilpr$mean <- (pupilpr$PupilLeft + pupilpr$PupilRight) / 2 # Media entre pupila direita e esquerda
-pupilpr$X <- NULL #Remove a coluna X (que apareceu n„o sei de onde)
-pupilpr$PupilLeft <- NULL #N„o usa mais, remove para diminuir o processamento
-pupilpr$PupilRight <- NULL #N„o usa mais, remove para diminuir o processamento
+pupilpr$X <- NULL #Remove a coluna X (que apareceu n√£o sei de onde)
+pupilpr$PupilLeft <- NULL #N√£o usa mais, remove para diminuir o processamento
+pupilpr$PupilRight <- NULL #N√£o usa mais, remove para diminuir o processamento
 
 fvarpr = function(rec,slide){
   lr<-length(rec) #comprimento de rec
@@ -526,9 +515,9 @@ fvarpr = function(rec,slide){
   for (j in c(rec)){
     c<-1
     for(i in c(slide)){
-      x1 <- pupilpr[pupilpr$Ô..RecordingName==j,] #Filtra o participante
+      x1 <- pupilpr[pupilpr$√Ø..RecordingName==j,] #Filtra o participante
       x2 <- x1[x1$MediaName==i,] #Filtra o slide
-      lista[r,c] <- var(x2$mean) #Calcula a Vari‚ncia de cada participante por Slide e monta lista
+      lista[r,c] <- var(x2$mean) #Calcula a Vari√¢ncia de cada participante por Slide e monta lista
       c<-c+1
     }
     r<-r+1
@@ -553,8 +542,8 @@ for(i in 1:18){
 pdf("14-PROVA REAL.pdf",width = 6, height = 4)
 par(mfrow=c(1,1),mar=c(4,4,1,1),bty="l",cex=0.85)
 plot(c(1:18),Gq1,col="blue",type="p",xaxt="n",ylim=c(0,.12),
-     xlab="Quantidade",ylab="Vari‚ncia mÈdia do quartil (cm)")
-lines(lowess(Gq1),col="blue",lwd=1)#lowess usa regress„o polinomial ponderada localmente
+     xlab="Quantidade",ylab="Vari√¢ncia m√©dia do quartil (cm)")
+lines(lowess(Gq1),col="blue",lwd=1)#lowess usa regress√£o polinomial ponderada localmente
 lines(Gq2,col="green",type="p")
 lines(lowess(Gq2),col="green",lwd=1)
 lines(Gq3,col="orange",type="p")
@@ -568,9 +557,9 @@ lines(Gpr2,col="brown",type="p")
 lines(lowess(Gpr2),col="brown",lwd=1,lty=2)
 lines(Gpr3,col="purple",type="p")
 lines(lowess(Gpr3),col="purple",lwd=1,lty=2)
-legend("topleft", legend=c("1∫ Quartil","2∫ Quartil","3∫ Quartil","4∫ Quartil"),cex = 0.85,
+legend("topleft", legend=c("1¬∫ Quartil","2¬∫ Quartil","3¬∫ Quartil","4¬∫ Quartil"),cex = 0.85,
        col=c("blue","green","orange","red"),lty=1,lwd=1, bty="n")
-legend("topright", legend=c("IndivÌduo 1","IndivÌduo 2","IndivÌduo 3"),cex = 0.85,
+legend("topright", legend=c("Indiv√≠duo 1","Indiv√≠duo 2","Indiv√≠duo 3"),cex = 0.85,
        col=c("black","brown","purple"),lty=2,lwd=1, bty="n")
 axis(1,at=1:18,labels=c("","20","","","56","","","84","","","88","","","154","","","156",""))
 dev.off()
@@ -593,16 +582,16 @@ recteste<-c("Rec 02","Rec 03","Rec 04","Rec 05","Rec 06","Rec 07","Rec 08","Rec 
 #             "Rec 23","Rec 24","Rec 25","Rec 26","Rec 27","Rec 28","Rec 30","Rec 31")
 
 varianciateste <- fvar(recteste,slideq)
-varianciateste[9,14] <- 0.046088473 #valor mÈdio inserido para substituir erro
-#kmeansteste <- kmeans(varianciateste,4, nstart = 25) # OpÁ„o com 25 configuraÁıes iniciais
+varianciateste[9,14] <- 0.046088473 #valor m√©dio inserido para substituir erro
+#kmeansteste <- kmeans(varianciateste,4, nstart = 25) # Op√ß√£o com 25 configura√ß√µes iniciais
 kmeansteste <- kmeans(varianciateste,4)
 varianciakmeansteste <- data.frame(recteste,kmeansteste$cluster)
 distanciaeclidiana <- dist(varianciateste)
 cluster <- hclust(distanciaeclidiana)
 
-pdf("Cluster Kmeans 30.pdf",width = 10, height = 8) #Gr·fico OK
+pdf("Cluster Kmeans 30.pdf",width = 10, height = 8) #Gr√°fico OK
 par(mfrow=c(1,1),mar=c(5.1,4.5,4.1,2.1),bty="l",cex.axis=1.2,cex.lab=1.2)
 plot(cluster,sub = "", main="Dendograma de agrupamento em cluster",
-     xlab="IndÌviduos",ylab="Dist‚ncia euclidiana")
+     xlab="Ind√≠viduos",ylab="Dist√¢ncia euclidiana")
 rect.hclust(cluster,4)
 dev.off()
